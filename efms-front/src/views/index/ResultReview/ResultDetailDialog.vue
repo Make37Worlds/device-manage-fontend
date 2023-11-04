@@ -1,112 +1,112 @@
 <template>
-  <el-dialog 
-    title="成果审核" 
+  <el-dialog
+    title="Result Review"
     width="50%"
     @close="resetForm('reviewForm')"
-    :visible.sync="dialogVisible" 
+    :visible.sync="dialogVisible"
     :before-close="handleClose">
-    <el-descriptions size="medium" title="待审核成果详情" class="margin-top" :column="2" border>
+    <el-descriptions size="medium" title="Pending Review Result Detail" class="margin-top" :column="2" border>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-document"></i>
-          维修单号
+          Maintenance Order ID
         </template>
         {{logInfo.id}}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-printer"></i>
-          设施编号
+          Facility ID
         </template>
         {{logInfo.facId}}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-user"></i>
-          报修人编号
+          Repair Applicant ID
         </template>
         {{logInfo.createBy}}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-date"></i>
-          报修时间
+          Time of Report
         </template>
         {{logInfo.createTime}}
       </el-descriptions-item>
       <el-descriptions-item :span="2">
         <template slot="label">
           <i class="el-icon-document"></i>
-          故障状况
+          Fault Status
         </template>
         <div v-html="logInfo.faultCondition"></div>
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-user"></i>
-          维修人编号
+          Maintenance Technician ID
         </template>
         {{logInfo.fixBy}}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-date"></i>
-          维修时间
+          Maintenance Time
         </template>
         {{resultInfo.fixTime}}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-coin"></i>
-          预算成本
+          Estimated Cost
         </template>
         {{logInfo.budget}}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-coin"></i>
-          目前成本
+          Current Cost
         </template>
         {{resultInfo.actualCost}}
       </el-descriptions-item>
       <el-descriptions-item :span="2">
         <template slot="label">
           <i class="el-icon-document"></i>
-          故障原因
+          Cause of the Fault
         </template>
         {{resultInfo.faultReason}}
       </el-descriptions-item>
       <el-descriptions-item :span="2">
         <template slot="label">
           <i class="el-icon-document"></i>
-          成果说明
+          Result Report
         </template>
         <div v-html=resultInfo.description></div>
       </el-descriptions-item>
     </el-descriptions>
     <el-divider></el-divider>
-    <el-form 
-      :model="reviewInfo" 
-      :rules="rules"  
-      label-width="100px" 
+    <el-form
+      :model="reviewInfo"
+      :rules="rules"
+      label-width="100px"
       class="demo-ruleForm"
       ref="reviewForm">
-      <el-form-item label="审核结果" prop="result">
+      <el-form-item label="Review Result" prop="result">
         <el-radio-group v-model.number="reviewInfo.result">
-          <el-radio :label="2">通过</el-radio>
-          <el-radio :label="3">不通过</el-radio>
+          <el-radio :label="2">Approved</el-radio>
+          <el-radio :label="3">Not Approved</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="处理原因" prop="reason">
-        <el-input 
-        type="textarea" 
+      <el-form-item label="Reason" prop="reason">
+        <el-input
+        type="textarea"
         maxlength="50"
         show-word-limit
         v-model="reviewInfo.reason"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('reviewForm')">提交</el-button>
-        <el-button @click="resetForm('reviewForm')">重置</el-button>
+        <el-button type="primary" @click="submitForm('reviewForm')">Submit</el-button>
+        <el-button @click="resetForm('reviewForm')">Reset</el-button>
       </el-form-item>
     </el-form>
   </el-dialog>
@@ -121,12 +121,12 @@
         if (value) {
           // 当值为0的时候当做没选择
           if (value==0) {
-            callback(new Error('请选择审核结果'))
+            callback(new Error('Please choose review result'))
           }  else {
             callback();
           }
         } else {
-          callback(new Error('请选择审核结果'));
+          callback(new Error('Please choose review result'));
         }
       };
       return {
@@ -141,7 +141,7 @@
             { required: true, validator: validateRadio , trigger: 'change' }
           ],
           reason: [
-            { required: true, message: '请填写处理原因', trigger: 'blur' }
+            { required: true, message: 'Please enter the reason', trigger: 'blur' }
           ]
         }
       }
@@ -161,7 +161,7 @@
           if (valid) {
             this.$emit("submitReview",this.resultInfo.id,this.reviewInfo);
           }else{
-            this.$confirm("填报信息有误，请检查后再试！");
+            this.$confirm("The information submitted is incorrect, please check and try again!");
           }
         })
       },
@@ -169,7 +169,7 @@
         this.$refs[formName].resetFields();
       },
       handleClose(){
-         this.$confirm('确认关闭？')
+         this.$confirm('Sure to close?')
           .then(_ => {
             this.resetForm('reviewForm');
             this.$emit('closeDialog');

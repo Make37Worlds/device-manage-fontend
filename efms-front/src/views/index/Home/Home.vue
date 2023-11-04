@@ -3,63 +3,63 @@
   <!-- 搜索功能 -->
   <div class="search">
     <div class="search-input">
-      <el-input v-model.number="searchInfo.logId" placeholder="输入维修单号"  prefix-icon="el-icon-search"></el-input>
-      <el-input clearable v-model="searchInfo.employee" placeholder="输入人员编号"  prefix-icon="el-icon-search"></el-input>
+      <el-input v-model.number="searchInfo.logId" placeholder="Enter the maintenance order ID"  prefix-icon="el-icon-search"></el-input>
+      <el-input clearable v-model="searchInfo.employee" placeholder="Enter personnel ID"  prefix-icon="el-icon-search"></el-input>
     </div>
     <div class="search-button">
-      <el-button type="primary" @click="handleSearch">搜 索</el-button>
-      <el-button @click="resetSearch">重 置</el-button>
-      <el-button @click="getPage">我 的</el-button>
+      <el-button type="primary" @click="handleSearch">Search</el-button>
+      <el-button @click="resetSearch">Reset</el-button>
+      <el-button @click="getPage">Mine</el-button>
     </div>
   </div>
 
   <!-- 展示已有的维修单数据 -->
   <div class="data-table">
     <el-table :data="fixLogList" max-height="500" border class="table">
-      <el-table-column prop="id" label="维修单号" width="100"></el-table-column>
-      <el-table-column prop="createBy" label="申报人" width="120">
+      <el-table-column prop="id" label="Maintenance Order ID" width="100"></el-table-column>
+      <el-table-column prop="createBy" label="Repair Applicant" width="120">
         <template slot-scope="scope">
           <show-name :id="scope.row.createBy"></show-name>
         </template>
       </el-table-column>
-      <el-table-column prop="fixBy" label="维修员" width="120">
+      <el-table-column prop="fixBy" label="Maintenance Technician" width="120">
         <template slot-scope="scope">
           <show-name :id="scope.row.fixBy"></show-name>
         </template>
       </el-table-column>
-      <el-table-column prop="head" label="负责人" width="120">
+      <el-table-column prop="head" label="Person in Charge" width="120">
         <template slot-scope="scope">
           <show-name :id="scope.row.head"></show-name>
         </template>
       </el-table-column>
-      <el-table-column prop="state" label="当前进度" width="150">
+      <el-table-column prop="state" label="Current Progress" width="150">
         <template slot-scope="scope">
           <show-state :state="scope.row.state"></show-state>
         </template>
       </el-table-column>
-      <el-table-column label="详情" width="100">
+      <el-table-column label="Detail" width="100">
         <template slot-scope="scope">
-            <el-button @click="handleDetail(scope.row.id)" type="text" size="small">查  看</el-button> 
+            <el-button @click="handleDetail(scope.row.id)" type="text" size="small">View</el-button>
         </template>
       </el-table-column>
-      <el-table-column label="操作">
+      <el-table-column label="Operation">
         <template slot-scope="scope">
           <div v-show="currentUser===scope.row.fixBy">
             <div v-show="scope.row.state===2||scope.row.state===4||scope.row.state===5||scope.row.state===8">
-              <el-button  @click="handleAddDeclaration(scope.row.id)" type="text" size="small">追加申报</el-button>
-              <el-button  @click="handleResultReport(scope.row.id)" type="text" size="small">成果上报</el-button>
+              <el-button  @click="handleAddDeclaration(scope.row.id)" type="text" size="small">Additional Declaration</el-button>
+              <el-button  @click="handleResultReport(scope.row.id)" type="text" size="small">Result Reporting</el-button>
             </div>
             <div v-show="scope.row.state===1||scope.row.state===3||scope.row.state===6||scope.row.state===7">
-              <el-tag type="info" effect="dark">维修单当前状态不可操作</el-tag>
+              <el-tag type="info" effect="dark">Current status of maintenance order is not operable.</el-tag>
             </div>
           </div>
           <div v-show="currentUser!==scope.row.fixBy">
-            <el-tag type="warning" effect="dark">非维修员，不可操作</el-tag>
+            <el-tag type="warning" effect="dark">Not maintenance technician, operation not allowed.</el-tag>
           </div>
         </template>
       </el-table-column>
       <template slot="empty">
-        <el-empty description="当前无数据"></el-empty>
+        <el-empty description="No data available currently."></el-empty>
       </template>
     </el-table>
 
@@ -259,7 +259,7 @@
       },
 
       closeDialog4AddDeclaration(){
-        this.dialog4AddDeclarationVisible=false;    
+        this.dialog4AddDeclarationVisible=false;
         this.log2AddDeclare='';
       },
 

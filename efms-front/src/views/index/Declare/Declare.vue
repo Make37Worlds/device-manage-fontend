@@ -1,14 +1,14 @@
 <template>
   <el-form :model="logInfo" :rules="rules" ref="logForm" label-width="120px" class="demo-ruleForm">
-    <el-form-item label="损毁设施编号" prop="facId">
+    <el-form-item label="Damaged Facility ID" prop="facId">
       <el-input v-model="logInfo.facId"></el-input>
     </el-form-item>
-    <el-form-item label="故障状况" prop="faultCondition">
+    <el-form-item label="Fault Status" prop="faultCondition">
       <RichTextEditor ref="RichTextEditor" ></RichTextEditor>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="submitForm('logForm')">立即申报</el-button>
-      <el-button @click="resetForm('logForm')">重  置</el-button>
+      <el-button type="primary" @click="submitForm('logForm')">Report</el-button>
+      <el-button @click="resetForm('logForm')">Reset</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -30,8 +30,8 @@ import RichTextEditor from '../../../components/RichTextEditor.vue'
         },
         rules:{
           facId: [
-            { required: true, message: '请选择故障设施编号', trigger: 'blur' },
-            { min: 11, max: 11, message: '设施编号为11位数', trigger: 'blur' }
+            { required: true, message: 'Please select damaged facility ID', trigger: 'blur' },
+            { min: 11, max: 11, message: 'Facility number is an 11-digit number.', trigger: 'blur' }
           ],
           faultCondition:[
             {required: true}
@@ -40,10 +40,10 @@ import RichTextEditor from '../../../components/RichTextEditor.vue'
       }
     },
     methods:{
-      submitForm(formName){ 
+      submitForm(formName){
         if(this.$refs['RichTextEditor'].isEmpty()){
           this.$notify.warning({
-            title:"故障状况不能为空。",
+            title:"Fault status cannot be empty",
           })
         }else{
           this.logInfo.faultCondition=this.$refs['RichTextEditor'].getContent();
@@ -57,7 +57,7 @@ import RichTextEditor from '../../../components/RichTextEditor.vue'
               axios.post('/efms/declare',newLog).then((res)=>{
                 if(res.data.flag&&res.data.data!=null){
                   this.$notify({
-                    title:"维修申报成功，新增维修单编号为"+res.data.data,
+                    title:"Maintenance report successful, the  maintenance order number is"+res.data.data,
                     type:'success',
                   })
                   this.resetForm(formName);
@@ -69,11 +69,11 @@ import RichTextEditor from '../../../components/RichTextEditor.vue'
               })
             } else {
               this.$notify.error({
-                title:'申报信息有误，操作失败',
+                title:'The information is incorrect, operation failed.',
               })
             }
           });
-        }       
+        }
       },
       resetForm(formName){
         this.$refs[formName].resetFields();

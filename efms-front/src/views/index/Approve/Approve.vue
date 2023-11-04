@@ -3,21 +3,21 @@
     <!-- 展示待审核的追加申报单数据 -->
     <div class="data-table">
       <el-table :data="approveList" border class="table">
-        <el-table-column prop="id" label="追加申报单编号" width="180"></el-table-column>
-        <el-table-column prop="logId" label="维修单号" width="180"></el-table-column>
-        <el-table-column prop="addBudget" label="追加的预算"></el-table-column>
-        <el-table-column prop="createBy" label="追加申报人">
+        <el-table-column prop="id" label="Additional Application Form ID" width="180"></el-table-column>
+        <el-table-column prop="logId" label="Additional Maintenance Order ID" width="180"></el-table-column>
+        <el-table-column prop="addBudget" label="Additional Budget"></el-table-column>
+        <el-table-column prop="createBy" label="Additional Applicant">
           <template slot-scope="scope">
             <show-name :id="scope.row.createBy"></show-name>
           </template>
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column label="Operation">
           <template slot-scope="scope">
-            <el-button @click="handleDetail(scope.row.id)" type="text" size="small">审  批</el-button>
+            <el-button @click="handleDetail(scope.row.id)" type="text" size="small">Review</el-button>
           </template>
         </el-table-column>
         <template slot="empty">
-          <el-empty description="当前无数据"></el-empty>
+          <el-empty description="No data available currently."></el-empty>
         </template>
       </el-table>
     </div>
@@ -28,7 +28,7 @@
     </div>
 
     <div class="option">
-      <el-button type="primary" icon="el-icon-refresh" @click="getPage">刷 新</el-button>
+      <el-button type="primary" icon="el-icon-refresh" @click="getPage">Refresh</el-button>
     </div>
 
     <!-- 展示待审核追加申报单详情 -->
@@ -45,7 +45,7 @@
   export default {
     name:"Approve",
     components: {
-      ApproveDialog, 
+      ApproveDialog,
       Pagination,
       showName,
     },
@@ -67,7 +67,7 @@
     },
     methods:{
       getPage(){
-        console.log("咋不更新啊");
+        console.log("Update");
         axios.get("/efms/approve/"+this.pagination.currentPage+"/"+this.pagination.pageSize+"/"+store.getters.getUserId).then((res)=>{
           if(res.data.flag && res.data.data!=null){
             this.approveList=res.data.data.records;
@@ -82,7 +82,7 @@
           }
         })
       },
-      
+
       changePage(changeTo){
         this.pagination.currentPage=changeTo;
         this.getPage();

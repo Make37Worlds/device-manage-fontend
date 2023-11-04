@@ -3,13 +3,13 @@
     <!-- 搜索 -->
     <div class="search">
       <div class="search-input">
-        <el-input v-model="searchInfo.eqmName" placeholder="输入设施名称"  prefix-icon="el-icon-search"></el-input>
-        <el-input v-model="searchInfo.eqmId" placeholder="输入设施编号"  prefix-icon="el-icon-search"></el-input>
-        
+        <el-input v-model="searchInfo.eqmName" placeholder="Enter facility name"  prefix-icon="el-icon-search"></el-input>
+        <el-input v-model="searchInfo.eqmId" placeholder="Enter facility ID"  prefix-icon="el-icon-search"></el-input>
+
       </div>
       <div class="search-button">
-        <el-button type="primary" @click="getPage">搜 索</el-button>
-        <el-button @click="resetSearch">重 置</el-button>
+        <el-button type="primary" @click="getPage">Search</el-button>
+        <el-button @click="resetSearch">Reset</el-button>
       </div>
     </div>
 
@@ -21,55 +21,55 @@
         class="table">
         <el-table-column
           prop="id"
-          label="设施编号"
+          label="Facility ID"
           width="180">
         </el-table-column>
         <el-table-column
           prop="name"
-          label="设施名称"
+          label="Facility Name"
           width="180">
         </el-table-column>
         <el-table-column
           prop="depId"
-          label="部门">
+          label="Department">
           <template slot-scope="scope">
             <show-dep :depId="scope.row.depId"></show-dep>
           </template>
         </el-table-column>
         <el-table-column
           prop="office"
-          label="办公室">
+          label="Office">
         </el-table-column>
         <el-table-column
           prop="state"
-          label="设施状态">
+          label="State">
           <template slot-scope="scope">
             {{getState(scope.row.state)}}
           </template>
         </el-table-column>
         <el-table-column
-          label="操作">
+          label="Operation">
           <template slot-scope="scope">
             <div v-show="scope.row.state!==2">
-              <el-button @click="handleUpdate(scope.row.id)" type="text" size="small">修改</el-button>
+              <el-button @click="handleUpdate(scope.row.id)" type="text" size="small">Modify</el-button>
               <el-popconfirm
-                  title="是否确认删除该设施？"
+                  title="Confirm deletion?"
                   @confirm="handleDelete(scope.row.id)" >
-                <el-button slot="reference" 
-                          type="text" 
+                <el-button slot="reference"
+                          type="text"
                           size="small">
                   删除
                 </el-button>
               </el-popconfirm>
             </div>
             <div v-show="scope.row.state===2">
-              <el-tag type="warning" effect="dark">维修中，不可操作</el-tag>
+              <el-tag type="warning" effect="dark">Under repair, not operable</el-tag>
             </div>
-            
+
           </template>
         </el-table-column>
         <template slot="empty">
-          <el-empty description="当前无数据"></el-empty> 
+          <el-empty description="No data available currently"></el-empty>
         </template>
       </el-table>
     </div>
@@ -85,10 +85,10 @@
     </div>
 
     <!-- 新增设施悬浮框 -->
-    <EqmDialog ref="dialog4Create" title="新增设施" :dialog-visible="dialog4CreateVisible" @closeDialog="closeDialog4Create" @submit="submitCreate"></EqmDialog>
+    <EqmDialog ref="dialog4Create" title="Add Facility" :dialog-visible="dialog4CreateVisible" @closeDialog="closeDialog4Create" @submit="submitCreate"></EqmDialog>
 
     <!-- 修改设施悬浮框 -->
-    <EqmDialog ref="dialog4Update" title="修改设施" :dialog-visible="dialog4UpdateVisible" @closeDialog="closeDialog4Update" @submit="submitUpdate" :eqm-info="Eqm2Update"></EqmDialog>
+    <EqmDialog ref="dialog4Update" title="Modify Facility" :dialog-visible="dialog4UpdateVisible" @closeDialog="closeDialog4Update" @submit="submitUpdate" :eqm-info="Eqm2Update"></EqmDialog>
   </div>
 </template>
 
@@ -137,12 +137,12 @@
       //根据设施状态字段显示状态信息
       getState(state){
         switch(state){
-          case 1: 
-            return "运行中";
+          case 1:
+            return "In Operation";
           case 2:
-            return "维修中";
+            return "In Repair";
           case 3:
-            return "关闭";
+            return "Closed";
         }
       },
       //获取某一页
@@ -150,7 +150,7 @@
         var param="?q";
         param+="&name="+this.searchInfo.eqmName;
         param+="&id="+this.searchInfo.eqmId;
-              
+
         axios.get("/efms/eqmmanage/"+this.pagination.currentPage+"/"+this.pagination.pageSize+param).then((res)=>{
           if(res.data.flag && res.data.data!=null){
             this.eqmList=res.data.data.records;
@@ -218,7 +218,7 @@
             this.dialog4CreateVisible=false;
             this.$notify({
               title: res.data.msg,
-              message:"新增设施编号为："+res.data.data,
+              message:"New Facility ID: "+res.data.data,
               type: 'success'
             });
           }else{

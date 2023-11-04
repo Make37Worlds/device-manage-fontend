@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    title="成果上报"
+    title="Result Reporting"
     @close="resetForm('resultForm')"
     :visible.sync="dialogVisible"
     width="50%"
@@ -12,37 +12,37 @@
       ref="resultForm"
       label-width="100px"
       class="demo-ruleForm">
-      <el-form-item label="维修单号">
+      <el-form-item label="Maintenance Order ID">
         <el-input :disabled="true" v-model="resultReportInfo.logId"></el-input>
       </el-form-item>
-      <el-form-item label="维修时间" prop="fixTime">
+      <el-form-item label="Maintenance Time" prop="fixTime">
         <el-date-picker
           v-model="resultReportInfo.fixTime"
           type="datetime"
           value-format="yyyy-MM-dd HH:mm:ss"
           :picker-options="pickerOptions"
-          placeholder="选择维修时间">
+          placeholder="Select Maintenance Time">
         </el-date-picker>
       </el-form-item>
-      <el-form-item label="实际成本" prop="actualCost">
+      <el-form-item label="Actual Cost" prop="actualCost">
         <el-input v-model.number="resultReportInfo.actualCost"></el-input>
       </el-form-item>
-      <el-form-item label="故障原因" prop="faultReason">
+      <el-form-item label="Cause of Fault" prop="faultReason">
         <el-input
           type="textarea"
           :rows="2"
-          placeholder="请输入内容"
+          placeholder="Please enter content."
           maxlength="200"
           show-word-limit
           v-model="resultReportInfo.faultReason">
         </el-input>
       </el-form-item>
-      <el-form-item label="成果说明" prop="description">
+      <el-form-item label="Result Description" prop="description">
         <RichTextEditor ref="RichTextEditor"></RichTextEditor>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('resultForm')">提 交</el-button>
-        <el-button @click="resetForm('resultForm')">重 置</el-button>
+        <el-button type="primary" @click="submitForm('resultForm')">Submit</el-button>
+        <el-button @click="resetForm('resultForm')">Reset</el-button>
       </el-form-item>
     </el-form>
   </el-dialog>
@@ -58,14 +58,14 @@
     data(){
       var checkMoney = (rule, value, callback) => {
         if (value===null) {
-          return callback(new Error('实际成本不能为空'));
+          return callback(new Error('Actual cost cannot be empty'));
         }
         setTimeout(() => {
           if (!Number.isInteger(value)) {
-            callback(new Error('请输入实际成本'));
+            callback(new Error('Please enter actual cost'));
           } else {
             if (value < 0) {
-              callback(new Error('实际成本必须大于等于0元'));
+              callback(new Error('Actual cost must be no smaller than 0.'));
             }else {
               callback();
             }
@@ -90,13 +90,13 @@
         },
         rules:{
           fixTime: [
-            { required: true, message: '请选择维修时间', trigger: 'change' }
+            { required: true, message: 'Please select  maintenance time', trigger: 'change' }
           ],
           actualCost: [
             { required: true, validator: checkMoney, trigger: 'blur' }
           ],
           faultReason: [
-            { required: true, message: '请输入故障原因', trigger: 'blur' }
+            { required: true, message: 'Please enter the cause of Fault', trigger: 'blur' }
           ],
           description:[
             { required: true }
@@ -114,19 +114,19 @@
     methods:{
       submitForm(formName){
         if(this.$refs['RichTextEditor'].isEmpty()){
-          this.$confirm('成果说明不能为空。');
+          this.$confirm('Result Description cannot be empty');
         }else{
-          this.resultReportInfo.description=this.$refs['RichTextEditor'].getContent();  
+          this.resultReportInfo.description=this.$refs['RichTextEditor'].getContent();
           this.$refs[formName].validate((valid) => {
-            if (valid) {   
+            if (valid) {
               this.resultReportInfo.createTime=new Date().getTime();
               this.$emit("submitForm",this.resultReportInfo);
             } else {
-              this.$confirm('填报信息有误，请检查后重试');
+              this.$confirm('The information is incorrect, please check and retry.');
             }
-          });       
+          });
         }
-        
+
 
       },
       resetForm(formName){
@@ -134,7 +134,7 @@
         this.$refs['RichTextEditor'].Clear();
       },
       handleClose(done){
-        this.$confirm('确认关闭？')
+        this.$confirm('Confirm to close?')
           .then(_ => {
             this.resetForm('resultForm');
             this.$emit('closeDialog');

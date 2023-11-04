@@ -3,13 +3,13 @@
     <!-- 搜索 -->
     <div class="search">
       <div class="search-input">
-        <el-input v-model="searchInfo.empName" placeholder="输入人员姓名"  prefix-icon="el-icon-search"></el-input>
-        <el-input v-model="searchInfo.empId" placeholder="输入人员编号"  prefix-icon="el-icon-search"></el-input>
-        
+        <el-input v-model="searchInfo.empName" placeholder="Please enter name"  prefix-icon="el-icon-search"></el-input>
+        <el-input v-model="searchInfo.empId" placeholder="Please enter ID"  prefix-icon="el-icon-search"></el-input>
+
       </div>
       <div class="search-button">
-        <el-button type="primary" @click="getPage">搜 索</el-button>
-        <el-button @click="resetSearch">重 置</el-button>
+        <el-button type="primary" @click="getPage">Search</el-button>
+        <el-button @click="resetSearch">Reset</el-button>
       </div>
     </div>
 
@@ -21,54 +21,54 @@
         class="table">
         <el-table-column
           prop="id"
-          label="人员编号"
+          label="ID"
           width="150">
         </el-table-column>
         <el-table-column
           prop="name"
-          label="人员名称"
+          label="Name"
           width="100">
         </el-table-column>
         <el-table-column
           prop="sex"
-          label="性别"
+          label="Sex"
           width="50">
         </el-table-column>
         <el-table-column
           prop="depId"
-          label="部门">
+          label="Department">
           <template slot-scope="scope">
             <show-dep :depId="scope.row.depId"></show-dep>
           </template>
         </el-table-column>
         <el-table-column
           prop="position"
-          label="职位">
+          label="Position">
         </el-table-column>
         <el-table-column
           prop="roleId"
-          label="角色">
+          label="Role">
           <template slot-scope="scope">
             <show-role :id="scope.row.roleId"></show-role>
           </template>
         </el-table-column>
         <el-table-column
           prop="phoneNumber"
-          label="联系方式">
+          label="Contact">
         </el-table-column>
         <el-table-column
           prop="birth"
-          label="出生年月">
+          label="Date of Birth">
         </el-table-column>
         <el-table-column
-          label="操作">
+          label="Operation">
           <template slot-scope="scope">
             <el-button @click="handleUpdate(scope.row.id)" type="text" size="small">修改</el-button>
             <el-popconfirm
-                title="是否确认删除该人员？"
+                title="Confirm the delete action?"
                 @confirm="handleDelete(scope.row.id)" >
-              <el-button slot="reference" 
-                        type="text" 
+              <el-button slot="reference"
+                        type="text"
                         size="small">
                 删除
               </el-button>
@@ -76,7 +76,7 @@
           </template>
         </el-table-column>
         <template slot="empty">
-          <el-empty description="当前无数据"></el-empty>
+          <el-empty description="No data currently"></el-empty>
         </template>
       </el-table>
 
@@ -93,10 +93,10 @@
     </div>
 
     <!-- 新增人员悬浮框 -->
-    <EmpDialog  ref="dialog4Create" title="新增人员" :dialog-visible="dialog4CreateVisible" @submit="submitCreate" @closeDialog="closeDialog4Create"></EmpDialog>
+    <EmpDialog  ref="dialog4Create" title="Add Personnel" :dialog-visible="dialog4CreateVisible" @submit="submitCreate" @closeDialog="closeDialog4Create"></EmpDialog>
 
     <!-- 修改人员悬浮框 -->
-    <EmpDialog ref="dialog4Update" title="修改人员" :dialog-visible="dialog4UpdateVisible" @submit="submitUpdate" @closeDialog="closeDialog4Update" :emp-info="Emp2Update"></EmpDialog>
+    <EmpDialog ref="dialog4Update" title="Modify Personnel" :dialog-visible="dialog4UpdateVisible" @submit="submitUpdate" @closeDialog="closeDialog4Update" :emp-info="Emp2Update"></EmpDialog>
   </div>
 </template>
 
@@ -157,7 +157,7 @@
         var param="?q";
         param+="&name="+this.searchInfo.empName;
         param+="&id="+this.searchInfo.empId;
-              
+
         axios.get("/efms/empmanage/"+this.pagination.currentPage+"/"+this.pagination.pageSize+param).then((res)=>{
           if(res.data.flag && res.data.data!=null){
             this.empList=res.data.data.records;
@@ -196,9 +196,9 @@
       //删除
       handleDelete(id){
         if(id===this.currentUser){
-          this.$confirm('此操作将删除当前登录用户，删除后将退出登录, 是否继续?', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
+          this.$confirm('This operation will delete the current logged in user and exit the login after deletion. Do you want to continue?', '提示', {
+            confirmButtonText: 'Confirm',
+            cancelButtonText: 'Cancel',
             type: 'warning'
           }).then(() => {//点击确认后，删除用户
             this.deleteEmployee(id);
@@ -212,11 +212,11 @@
           }).catch(() => {//取消删除
             this.$notify({
               type: 'info',
-              title: '已取消删除'
-            });          
+              title: 'Deletion Cancelled'
+            });
           });
         }else{
-          this.deleteEmployee(id);  
+          this.deleteEmployee(id);
         }
       },
       //解决更新事件
@@ -233,7 +233,7 @@
         }).finally(()=>{
           this.getPage();
         })
-        
+
       },
       //打开创建弹框
       handleCreate(){
@@ -251,7 +251,7 @@
             this.dialog4CreateVisible=false;
             this.$notify({
               title: res.data.msg,
-              message:"新增人员编号为："+res.data.data,
+              message:"New personnel number is："+res.data.data,
               type: 'success'
             });
           }else{
@@ -270,7 +270,7 @@
         }
         var msg="";
         if(id===this.currentUser){
-          msg="检测到当前用户信息更新，可以选择重新登录刷新权限。";
+          msg="It has been detected that the current user information has been updated. You can choose to log in again to refresh your permissions.";
         }
         axios.put("/efms/empmanage",newEmp).then((res)=>{
           if(res.data.flag){

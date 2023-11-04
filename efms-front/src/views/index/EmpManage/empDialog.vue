@@ -13,51 +13,51 @@
       ref="empForm"
       label-width="100px"
       class="demo-ruleForm">
-      <el-form-item label="人员名称" prop="name">
+      <el-form-item label="Name" prop="name">
         <el-input v-model="newEmpInfo.name"></el-input>
       </el-form-item>
-      <el-form-item label="性别" prop="sex">
+      <el-form-item label="Sex" prop="sex">
         <el-radio-group v-model="newEmpInfo.sex">
-          <el-radio label="男" >男</el-radio>
-          <el-radio label="女" >女</el-radio>
+          <el-radio label="male" >male</el-radio>
+          <el-radio label="female" >female</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="部门" prop="depId">
-        <el-select v-model.number="newEmpInfo.depId" placeholder="请选择部门">
-          <el-option label="总裁办" :value="1"></el-option>
-          <el-option label="维修部" :value="2"></el-option>
-          <el-option label="销售部" :value="3"></el-option>
-          <el-option label="运营部" :value="4"></el-option>
-          <el-option label="人事部" :value="5"></el-option>
+      <el-form-item label="Department" prop="depId">
+        <el-select v-model.number="newEmpInfo.depId" placeholder="Please select department">
+          <el-option label="President Office" :value="1"></el-option>
+          <el-option label="Maintenance Department" :value="2"></el-option>
+          <el-option label="Sales Department" :value="3"></el-option>
+          <el-option label="Operations Department" :value="4"></el-option>
+          <el-option label="Personnel Department" :value="5"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="职位" prop="position">
-        <el-select v-model="newEmpInfo.position" placeholder="请选择职位">
-          <el-option label="部门经理" value="部门经理"></el-option>
-          <el-option label="部门副经理" value="部门副经理"></el-option>
-          <el-option label="普通员工" value="普通员工"></el-option>
+      <el-form-item label="position" prop="position">
+        <el-select v-model="newEmpInfo.position" placeholder="Please select position">
+          <el-option label="Department Manager" value="部门经理"></el-option>
+          <el-option label="Deputy Department Manager" value="部门副经理"></el-option>
+          <el-option label="Employee" value="普通员工"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="角色" prop="roleId">
-        <el-select v-model.number="newEmpInfo.roleId" placeholder="请选择角色">
+      <el-form-item label="Role" prop="roleId">
+        <el-select v-model.number="newEmpInfo.roleId" placeholder="Please select role">
           <el-option v-for="role in roles" :key="role.id" :label="role.name" :value="role.id"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="联系方式" prop="phoneNumber">
+      <el-form-item label="Contact" prop="phoneNumber">
         <el-input v-model="newEmpInfo.phoneNumber"></el-input>
       </el-form-item>
-      <el-form-item label="出生年月日" prop="birth">
+      <el-form-item label="Date of Birth" prop="birth">
         <el-date-picker
           v-model="newEmpInfo.birth"
           type="date"
           value-format="yyyy-MM-dd"
-          placeholder="请选择出生年月日">
+          placeholder="Please select birthday">
         </el-date-picker>
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" @click="submitForm('empForm')">提 交</el-button>
-        <el-button @click="resetForm('empForm')">重 置</el-button>
+        <el-button type="primary" @click="submitForm('empForm')">Submit</el-button>
+        <el-button @click="resetForm('empForm')">Reset</el-button>
       </el-form-item>
     </el-form>
   </el-dialog>
@@ -89,27 +89,27 @@
         roles:{},
         rules: {
           name: [
-            { required: true, message: '请输入人员姓名', trigger: 'blur' },
-            { min: 1, max: 10, message: '长度在 1 到 10 个字符', trigger: 'blur' }
+            { required: true, message: 'Please enter name', trigger: 'blur' },
+            { min: 1, max: 10, message: 'Length between 1 to 10 characters', trigger: 'blur' }
           ],
           sex: [
-            { required: true, message: '请选择性别', trigger: 'change' }
+            { required: true, message: 'Please select sex', trigger: 'change' }
           ],
           depId: [
-            { required: true, message: '请选择部门', trigger: 'change' }
+            { required: true, message: 'Please select department', trigger: 'change' }
           ],
           position: [
-            { required: true, message: '请选择职位', trigger: 'change' }
+            { required: true, message: 'Please select position', trigger: 'change' }
           ],
           roleId: [
-            { required: true, message: '请选择角色', trigger: 'change' }
+            { required: true, message: 'Please select role', trigger: 'change' }
           ],
           phoneNumber: [
-            { required: true, message: '请输入联系方式', trigger: 'blur' },
-            { min: 11, max: 11, message: '长度为11个字符', trigger: 'blur' }
+            { required: true, message: 'Please select contact', trigger: 'blur' },
+            { min: 11, max: 11, message: 'Length is 11 characters.', trigger: 'blur' }
           ],
           birth: [
-            { required: true, message: '请选择出生年月', trigger: 'change' }
+            { required: true, message: 'Please select date of birth.', trigger: 'change' }
           ],
         },
         newEmpInfo: {
@@ -152,13 +152,13 @@
             this.newEmpInfo.timeIn=new Date().getTime();
             this.$emit('submit',this.newEmpInfo,this.empId);
           } else {
-            this.$confirm('填报信息有误，请检查后重试');
+            this.$confirm('Information submitted is incorrect, please check and try again.');
           }
         });
 
       },
       handleClose(done){
-        this.$confirm('确认关闭？')
+        this.$confirm('Confirm close?')
         .then(_ => {
           this.resetForm('empForm');
           this.$emit('closeDialog');

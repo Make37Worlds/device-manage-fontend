@@ -1,38 +1,38 @@
 <template>
-  <el-dialog title="待派遣维修单详情" :visible.sync="dialogVisible" width="50%" @open="getStaff" :before-close="handleClose">
+  <el-dialog title="Maintenance Order Awaiting Dispatch" :visible.sync="dialogVisible" width="50%" @open="getStaff" :before-close="handleClose">
     <el-descriptions class="margin-top" :column="2" border>
       <el-descriptions-item >
         <template slot="label">
           <i class="el-icon-document"></i>
-          维修单号
+          Maintenance Order ID
         </template>
         {{FixlogInfo.id}}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-document"></i>
-          设施编号
+          Facility ID
         </template>
         {{FixlogInfo.facId}}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-user"></i>
-          报修人编号
+          Maintenance Applicant ID
         </template>
         {{FixlogInfo.createBy}}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-date"></i>
-          申报时间
+          Report Time
         </template>
         {{FixlogInfo.createTime}}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-document"></i>
-          故障原因
+          Cause of Fault
         </template>
           <div v-html=FixlogInfo.faultCondition></div>
       </el-descriptions-item>
@@ -41,7 +41,7 @@
     <!--派遣与驳回按钮-->
     <div class="option">
       <div class="option-choose">
-        <el-select v-model="fixBy" clearable filterable placeholder="请选择要派遣的维修人员">
+        <el-select v-model="fixBy" clearable filterable placeholder="Select maintenance technician to dispatch">
           <el-option
             v-for="item in fixStaff"
             :key="item.id"
@@ -53,7 +53,7 @@
         </el-select>
       </div>
       <div class="option-button">
-        <el-button type="primary" size="medium" @click="submitForm">派 遣</el-button>
+        <el-button type="primary" size="medium" @click="submitForm">Dispatch</el-button>
       </div>
     </div>
   </el-dialog>
@@ -85,25 +85,25 @@ export default {
         if(res.data.flag&&res.data.data!=null){
           this.fixStaff=res.data.data;
         }else{
-          this.$confirm("维修人员获取失败，请关闭当前弹框，稍后再试");
+          this.$confirm("Failed to get  personnel info. Please close and try again later");
         }
       })
     },
 
     handleClose(done){
-      this.$confirm('确认关闭？')
+      this.$confirm('Confirm close?')
         .then(_ => {
           this.$emit('closeDialog');
         })
         .catch(_ => {});
     },
 
-    submitForm(){     
+    submitForm(){
       if(this.fixBy===""){
-        this.$confirm("请选择派遣人员。");
+        this.$confirm("Please select technician to dispatch");
       }else{
         this.$emit("submit",this.logId,this.fixBy);
-      } 
+      }
 
     }
   }

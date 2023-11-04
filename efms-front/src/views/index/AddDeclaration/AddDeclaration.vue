@@ -3,18 +3,18 @@
     <!-- 搜索 -->
     <div class="search">
       <div class="search-input">
-        <el-input v-model.number="searchInfo.logId" placeholder="输入维修单号"  prefix-icon="el-icon-search"></el-input>
-        <el-input v-model="searchInfo.createBy" placeholder="输入申报人" prefix-icon="el-icon-search"></el-input>
-        <el-select v-model.number="searchInfo.result" placeholder="请选择">
-          <el-option label="未审核" value=1></el-option>
-          <el-option label="审核通过" value=2></el-option>
-          <el-option label="审核未通过" value=3></el-option>
+        <el-input v-model.number="searchInfo.logId" placeholder="Enter Maintenance Order ID"  prefix-icon="el-icon-search"></el-input>
+        <el-input v-model="searchInfo.createBy" placeholder="Enter Repair Applicant ID" prefix-icon="el-icon-search"></el-input>
+        <el-select v-model.number="searchInfo.result" placeholder="Choose">
+          <el-option label="Not Reviewed" value=1></el-option>
+          <el-option label="Approved" value=2></el-option>
+          <el-option label="Not Approved" value=3></el-option>
         </el-select>
       </div>
       <div class="search-button">
-        <el-button type="primary" @click="handleSearch">搜 索</el-button>
-        <el-button @click="resetSearch">重 置</el-button>
-        <el-button @click="getPage">我 的</el-button>
+        <el-button type="primary" @click="handleSearch">Search</el-button>
+        <el-button @click="resetSearch">Reset</el-button>
+        <el-button @click="getPage">Mine</el-button>
       </div>
     </div>
 
@@ -25,25 +25,25 @@
         border
         class="table"
         max-height="500">
-        <el-table-column prop="id" label="追加申报单号" width="180"></el-table-column>
-        <el-table-column prop="logId" label="维修单号" width="180"></el-table-column>
-        <el-table-column prop="createBy" label="维修员">
+        <el-table-column prop="id" label="Additional Declaration ID" width="180"></el-table-column>
+        <el-table-column prop="logId" label="Maintenance Order ID" width="180"></el-table-column>
+        <el-table-column prop="createBy" label="Maintenance Technician">
           <template slot-scope="scope">
             <show-name :id="scope.row.createBy"></show-name>
           </template>
         </el-table-column>
-        <el-table-column prop="result" label="审核结果">
+        <el-table-column prop="result" label="Review Result">
           <template slot-scope="scope">
             <show-result :result="scope.row.result"></show-result>
           </template>
         </el-table-column>
-        <el-table-column label="详情">
+        <el-table-column label="Detail">
           <template slot-scope="scope">
-            <el-button @click="handleDetail(scope.row.id)" type="text" size="small">查看</el-button>
+            <el-button @click="handleDetail(scope.row.id)" type="text" size="small">View</el-button>
           </template>
         </el-table-column>
         <template slot="empty">
-          <el-empty description="当前无数据"></el-empty>
+          <el-empty description="No data available currently."></el-empty>
         </template>
       </el-table>
     </div>

@@ -7,15 +7,15 @@
         <el-input clearable v-model.number="searchInfo.logId" placeholder="输入维修单号"  prefix-icon="el-icon-search"></el-input>
         <el-input clearable v-model="searchInfo.createBy" placeholder="输入申报人编号"  prefix-icon="el-icon-search"></el-input>
         <el-select v-model.number="searchInfo.result" placeholder="请选择">
-          <el-option label="未审核" value=1></el-option>
-          <el-option label="审核通过" value=2></el-option>
-          <el-option label="审核未通过" value=3></el-option>
+          <el-option label="Not Reviewed" value=1></el-option>
+          <el-option label="Approved" value=2></el-option>
+          <el-option label="Not Approved" value=3></el-option>
         </el-select>
       </div>
       <div class="search-button">
-        <el-button type="primary" @click="handleSearch">搜 索</el-button>
-        <el-button @click="resetSearch">重 置</el-button>
-        <el-button @click="getPage">我 的</el-button>
+        <el-button type="primary" @click="handleSearch">Search</el-button>
+        <el-button @click="resetSearch">Reset</el-button>
+        <el-button @click="getPage">Mine</el-button>
       </div>
     </div>
 
@@ -27,36 +27,36 @@
         class="table">
         <el-table-column
           prop="id"
-          label="上报单号"
+          label="Report ID"
           width="180">
         </el-table-column>
         <el-table-column
           prop="logId"
-          label="维修单号"
+          label="Maintenance Order ID"
           width="180">
         </el-table-column>
         <el-table-column
           prop="createBy"
-          label="维修员">
+          label="Maintenance Technician">
           <template slot-scope="scope">
             <show-name :id="scope.row.createBy"></show-name>
           </template>
         </el-table-column>
         <el-table-column
           prop="result"
-          label="审核结果">
+          label="Review Result">
           <template slot-scope="scope">
             <show-result :result="scope.row.result"></show-result>
           </template>
         </el-table-column>
         <el-table-column
-          label="详情">
+          label="Detail">
           <template slot-scope="scope">
-            <el-button @click="handleDetail(scope.row.id)" type="text" size="small">查看</el-button>
+            <el-button @click="handleDetail(scope.row.id)" type="text" size="small">View</el-button>
           </template>
         </el-table-column>
         <template slot="empty">
-          <el-empty description="当前无数据"></el-empty>
+          <el-empty description="No data available yet"></el-empty>
         </template>
       </el-table>
     </div>
@@ -113,7 +113,7 @@
       //获取某一页
       getPage(){
         this.searchInfo.flag=true;
-        var param="?q&createBy="+store.getters.getUserId;      
+        var param="?q&createBy="+store.getters.getUserId;
         axios.get("/efms/resultreport/"+this.pagination.currentPage+"/"+this.pagination.pageSize+param).then((res)=>{
           if(res.data.data!=null && res.data.flag){
             this.reportList=res.data.data.records;
@@ -135,7 +135,7 @@
         param+="&logId="+this.searchInfo.logId;
         param+="&createBy="+this.searchInfo.createBy;
         param+="&result="+this.searchInfo.result;
-        
+
         axios.get("/efms/resultreport/"+this.pagination.currentPage+"/"+this.pagination.pageSize+param).then((res)=>{
           if(res.data.data!=null && res.data.flag){
             this.reportList=res.data.data.records;

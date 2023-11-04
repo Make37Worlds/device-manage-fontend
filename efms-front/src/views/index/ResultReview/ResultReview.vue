@@ -10,30 +10,30 @@
         class="table">
         <el-table-column
           prop="id"
-          label="成果单编号"
+          label="Result ID"
           width="180">
         </el-table-column>
         <el-table-column
           prop="logId"
-          label="维修单号"
+          label="Maintenance Order ID"
           width="180">
         </el-table-column>
         <el-table-column
           prop="createBy"
-          label="维修员">
+          label="Maintenance Technician ID">
         </el-table-column>
         <el-table-column
           prop="createTime"
-          label="上报时间">
+          label="Time of Report">
         </el-table-column>
         <el-table-column
-          label="操作">
+          label="Operation">
           <template slot-scope="scope">
             <el-button @click="handleDetail(scope.row.id)" type="text" size="small">审  核</el-button>
           </template>
         </el-table-column>
         <template slot="empty">
-          <el-empty description="当前无数据"></el-empty>
+          <el-empty description="No data available yet"></el-empty>
         </template>
       </el-table>
     </div>
@@ -44,7 +44,7 @@
     </div>
 
     <div class="option">
-      <el-button type="primary" icon="el-icon-refresh" @click="getPage">刷 新</el-button>
+      <el-button type="primary" icon="el-icon-refresh" @click="getPage">Refresh</el-button>
     </div>
 
     <!-- 展示待审核成果细节-->

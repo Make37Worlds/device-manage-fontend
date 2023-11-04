@@ -6,12 +6,12 @@
     trigger="hover">
     <div class="User" >
       <div class="info">
-        <h3>当前用户为：{{userId}}</h3>
-        <p>当前角色为：{{role}}</p>
+        <h3>Current User: {{userId}}</h3>
+        <p>Current Role: {{role}}</p>
       </div>
       <div class="op">
-        <el-button type="primary" @click="updatePassword" round>修改密码</el-button>
-        <el-button type="warning" @click="logout" round>退出登录</el-button>
+        <el-button type="primary" @click="updatePassword" round>Change Password</el-button>
+        <el-button type="warning" @click="logout" round>Logout</el-button>
       </div>
     </div>
     <img slot="reference" id="user" src="../assets/user.png">
@@ -38,9 +38,9 @@ import axios from "axios"
         })
       },
       logout(){
-        this.$confirm('是否确认登出？（退出后可重新登录）', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
+        this.$confirm('Confirm Logout?', '提示', {
+          confirmButtonText: 'Confirm',
+          cancelButtonText: 'Cancel',
           type: 'warning'
         }).then(() => {
           axios.delete("/efms/loginManage/logout/"+store.getters.getUserId).then((res)=>{

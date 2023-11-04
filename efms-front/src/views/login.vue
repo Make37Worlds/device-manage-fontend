@@ -1,7 +1,7 @@
 <template>
   <div class="login-bg">
     <div class="login-box">
-      <h3>设施维修管理系统</h3>
+      <h3>Device Maintenance Management System</h3>
       <el-form
         ref="form"
         label-width="0"
@@ -13,7 +13,7 @@
           <el-input
             prefix-icon="el-icon-user-solid"
             v-model="form.id"
-            placeholder="请输入登录账号"
+            placeholder="Please enter your login account."
             clearable
           ></el-input>
         </el-form-item>
@@ -22,7 +22,7 @@
             prefix-icon="el-icon-lock"
             type="password"
             v-model="form.password"
-            placeholder="请输入登录密码"
+            placeholder="Please enter your password."
             show-password
             clearable
           ></el-input>
@@ -30,7 +30,7 @@
         <el-form-item>
           <div class="btns">
             <div class="login-btn">
-              <el-button type="primary" @click="loginLogic">登录</el-button>
+              <el-button type="primary" @click="loginLogic">Login</el-button>
             </div>
           </div>
         </el-form-item>
@@ -53,14 +53,14 @@ export default {
         id: [
           {
             required: true,
-            message: "请输入登录用户账号",
+            message: "Please enter your login account",
             trigger: "blur"
           }
         ],
         password: [
           {
             required: true,
-            message: "请输入登录密码",
+            message: "Please enter your password",
             trigger: "blur"
           }
         ]
@@ -77,7 +77,7 @@ export default {
         if (!valid) return;
         const res = await loginApi(this.form);
         if (res.data.flag) {
-          this.$message.success("登录成功");
+          this.$message.success("Login Success!");
           const urls = res.data.data.menuList.map(item => item.url);
           this.setUrl(urls);
           this.buildDynamicRoute();
@@ -100,8 +100,8 @@ export default {
       }
       if(userInfo.userId&&userInfo.userId!==this.form.id){
         return this.$message({
-          title:"拒绝登录",
-          message:"当前浏览器已有登录用户，请退出登录，或更换浏览器后再试。"
+          title:"Login denied.",
+          message:"There is already a logged-in user in the current browser."
         });
       }else{
         return this.login();

@@ -1,38 +1,38 @@
 <template>
-  <el-dialog title="追加申报详情" :visible.sync="dialogVisible" width="50%" :before-close="handleClose">
+  <el-dialog title="Additional Declaration Detail" :visible.sync="dialogVisible" width="50%" :before-close="handleClose">
     <el-descriptions  size="medium" class="margin-top" :column="2" border>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-document"></i>
-          追加单号
+          Additional Declaration ID
         </template>
         {{AddDeclarationInfo.id}}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-document"></i>
-          维修单号
+          Maintenance Order ID
         </template>
         {{AddDeclarationInfo.logId}}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-user"></i>
-          维修员编号
+          Maintenance Technician ID
         </template>
         {{AddDeclarationInfo.createBy}}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-date"></i>
-          追加时间
+          Additional Time
         </template>
         {{AddDeclarationInfo.createTime}}
       </el-descriptions-item>
       <el-descriptions-item :span="2">
         <template slot="label">
           <i class="el-icon-coin"></i>
-          追加预算
+          Additional Budget
         </template>
         {{AddDeclarationInfo.addBudget}}
       </el-descriptions-item>
@@ -41,25 +41,25 @@
       <el-descriptions-item :span="2">
         <template slot="label">
           <i class="el-icon-document"></i>
-          追加说明
+          Additional Description
         </template>
         <div v-html=AddDeclarationInfo.description></div>
       </el-descriptions-item>
       <el-descriptions-item :span="2">
         <template slot="label">
           <i class="el-icon-s-check"></i>
-          审批结果
+          Reviewed Result
         </template>
         {{result}}
       </el-descriptions-item>
       <el-descriptions-item :span="2">
         <template slot="label" >
           <i class="el-icon-document"></i>
-          处理原因
+          Reason for Reviewed Result
         </template>
         {{AddDeclarationInfo.reason}}
       </el-descriptions-item>
-      
+
     </el-descriptions>
   </el-dialog>
 </template>
@@ -82,13 +82,13 @@ export default {
     AddDeclarationInfo(val){
       switch(val.result){
         case 1:
-          this.result='未审核';
+          this.result='Not Reviewed';
           break;
         case 2:
-          this.result='审核已通过';
+          this.result='Approved';
           break;
         case 3:
-          this.result='审核未通过';
+          this.result='Not Approved';
           break;
         default:
           break;

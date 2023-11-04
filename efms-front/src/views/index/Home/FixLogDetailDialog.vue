@@ -1,17 +1,17 @@
 <template>
-  <el-dialog title="维修单详情" @open="setState" :visible.sync="dialogVisible" width="50%" :before-close="handleClose">
+  <el-dialog title="Maintenance Order Detail" @open="setState" :visible.sync="dialogVisible" width="50%" :before-close="handleClose">
     <el-descriptions size="medium" class="margin-top" :column="2" border>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-document"></i>
-          维修单号
+          Maintenance Order ID
         </template>
         {{FixLogInfo.id}}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-user"></i>
-          申报人编号
+          Maintenance Applicant ID
         </template>
         {{FixLogInfo.createBy}}
       </el-descriptions-item>
@@ -19,56 +19,56 @@
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-document"></i>
-          设施编号
+          Facility ID
         </template>
         {{FixLogInfo.facId}}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-document"></i>
-          设施位置
+          Facility Location
         </template>
         {{FixLogInfo.facOffice}}
       </el-descriptions-item>
       <el-descriptions-item :span="2">
         <template slot="label">
           <i class="el-icon-date"></i>
-          申报时间
+          Time of Report
         </template>
         {{FixLogInfo.createTime}}
       </el-descriptions-item>
       <el-descriptions-item  :span="2">
         <template slot="label">
           <i class="el-icon-document"></i>
-          故障状况
+          Fault Status
         </template>
         <div v-html="FixLogInfo.faultCondition"></div>
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-user"></i>
-          维修人编号
+          Maintenance Technician ID
         </template>
         {{FixLogInfo.fixBy}}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-user"></i>
-          负责人编号
+          Person in Charge ID
         </template>
         {{FixLogInfo.head}}
       </el-descriptions-item>
       <el-descriptions-item :span="2">
         <template slot="label">
           <i class="el-icon-date"></i>
-          维修时间
+          Maintenance Time
         </template>
         {{FixLogInfo.fixTime}}
       </el-descriptions-item>
       <el-descriptions-item :span="2">
         <template slot="label" >
           <i class="el-icon-document"></i>
-          故障原因
+          Cause of Fault
         </template>
         {{FixLogInfo.faultReason}}
       </el-descriptions-item>
@@ -76,21 +76,21 @@
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-coin"></i>
-          维修预算
+          Maintenance Budget
         </template>
         {{FixLogInfo.budget}}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-coin"></i>
-          实际成本
+          Actual Cost
         </template>
         {{FixLogInfo.actualCost}}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-map-location"></i>
-          进度
+          Progress
         </template>
         {{stepInfo.currentState}}
       </el-descriptions-item>
@@ -114,28 +114,28 @@
         var state=this.FixLogInfo.state;
         switch(state){
           case 1:
-            this.stepInfo.currentState="已申报";
+            this.stepInfo.currentState="Damage Reported";
             break;
           case 2:
-            this.stepInfo.currentState="已派遣";
+            this.stepInfo.currentState="Dispatched";
             break;
           case 3:
-            this.stepInfo.currentState="已追加申报";
+            this.stepInfo.currentState="Additional Declared";
             break;
           case 4:
-            this.stepInfo.currentState="追加申报已通过";
+            this.stepInfo.currentState="Additional Declaration Approved";
             break;
           case 5:
-            this.stepInfo.currentState="追加申报未通过";
+            this.stepInfo.currentState="Additional Declaration Not Approved";
             break;
           case 6:
-            this.stepInfo.currentState="成果已上报";
+            this.stepInfo.currentState="Result Reported";
             break;
           case 7:
-            this.stepInfo.currentState="成果审核通过";
+            this.stepInfo.currentState="Result Report Approved";
             break;
           case 8:
-            this.stepInfo.currentState="成果审核未通过";
+            this.stepInfo.currentState="Result Report Not Approved";
             break;
         };
       },

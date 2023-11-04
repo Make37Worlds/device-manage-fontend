@@ -6,21 +6,21 @@
         :data="dispatchList"
         border
         class="table">
-        <el-table-column prop="id" label="维修单号" width="180">
+        <el-table-column prop="id" label="Maintenance Order ID" width="180">
         </el-table-column>
-        <el-table-column prop="createTime" label="申报时间" width="180">
+        <el-table-column prop="createTime" label="Report Time" width="180">
         </el-table-column>
-        <el-table-column prop="createBy" label="申报人" width="180">
+        <el-table-column prop="createBy" label="Maintenance Applicant ID" width="180">
         </el-table-column>
-        <el-table-column prop="facId" label="设施编号" width="180">
+        <el-table-column prop="facId" label="Facility ID" width="180">
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column label="Operation">
           <template slot-scope="scope">
-            <el-button @click="handleDispatch(scope.row.id)" type="text" size="small">派  遣</el-button>
+            <el-button @click="handleDispatch(scope.row.id)" type="text" size="small">Dispatch/el-button>
           </template>
         </el-table-column>
         <template slot="empty">
-          <el-empty description="当前无数据"></el-empty>
+          <el-empty description="No data available currently."></el-empty>
         </template>
       </el-table>
     </div>
@@ -107,7 +107,7 @@
           if(res.data.flag){
             this.dialog4DispatchVisible=false;
             this.$notify({
-              title:"派遣成功",
+              title:"Dispatched success",
               type:'success',
             })
           }else{

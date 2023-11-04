@@ -1,7 +1,7 @@
 <template>
   <div class="login-bg">
     <div class="login-box">
-      <h3>修改密码</h3>
+      <h3>Change Password</h3>
       <el-form
         ref="form"
         label-width="0"
@@ -14,7 +14,7 @@
             prefix-icon="el-icon-lock"
             type="password"
             v-model="form.oldPassword"
-            placeholder="请输入原始密码"
+            placeholder="Please enter the original password."
             show-password
             clearable
           ></el-input>
@@ -24,7 +24,7 @@
             prefix-icon="el-icon-lock"
             type="password"
             v-model="form.newPassword"
-            placeholder="请输入新密码"
+            placeholder="Please enter new password."
             show-password
             clearable
           ></el-input>
@@ -34,7 +34,7 @@
             prefix-icon="el-icon-lock"
             type="password"
             v-model="form.confirmPassword"
-            placeholder="请确认新密码"
+            placeholder="Please confirm the new password."
             show-password
             clearable
           ></el-input>
@@ -42,7 +42,7 @@
         <el-form-item>
           <div class="btns">
             <div class="login-btn">
-              <el-button type="primary" @click="update">修改</el-button>
+              <el-button type="primary" @click="update">Update</el-button>
             </div>
           </div>
         </el-form-item>
@@ -61,20 +61,20 @@ export default {
         oldPassword: "",
         newPassword: "",
         confirmPassword: "",
-        
+
       },
       rules: {
         oldPassword: [
           {
             required: true,
-            message: "请输入原密码",
+            message: "Please enter the original password",
             trigger: "blur"
           }
         ],
         newPassword: [
           {
             required: true,
-            message: "请输入新密码",
+            message: "Please enter new password",
             trigger: "blur"
           }
         ],
@@ -82,7 +82,7 @@ export default {
           {
             validator: (rule, value, callback) => {
               if (this.form.newPassword !== value) {
-                callback(new Error("两次新密码输入不一致"));
+                callback(new Error("The two passwords do not match."));
               }
               callback();
             }
@@ -107,8 +107,8 @@ export default {
             store.commit('clear');
             this.$notify({
               type:"success",
-              title:"修改密码成功",
-              message:timer+"秒后跳转至登录页面重新登录",
+              title:"Password changed successfully.",
+              message:timer+"seconds before you are redirected to the login page",
               duration:3000,
               onClose:()=>{
                 this.$router.push({name:'login'})
@@ -117,12 +117,12 @@ export default {
             store.commit('clear');
           }else{
             this.$notify.error({
-              title:"修改密码失败",
+              title:"Password changed failed.",
               message:res.data.msg,
             });
           }
         })
-        
+
       });
     }
   }

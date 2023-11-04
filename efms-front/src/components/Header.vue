@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <img id="logo" src="../assets/logo.png">
-    <span id="title">设施维修管理系统</span>
+    <span id="title">Device Maintenance Management System</span>
     <div id="user">
       <CurrentUser></CurrentUser>
     </div>

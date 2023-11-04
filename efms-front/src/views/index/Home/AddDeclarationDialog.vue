@@ -1,29 +1,29 @@
 <template>
-  <el-dialog 
-    title="追加申报" 
+  <el-dialog
+    title="Additional Declaration"
     :visible.sync="dialogVisible"
-    width="50%" 
+    width="50%"
     @close="resetForm('addDeclarationForm')"
     :before-close="handleClose">
-    <el-form 
-      @submit.native.prevent 
-      :model="addDeclarationInfo" 
-      :rules="rules" 
-      ref="addDeclarationForm" 
-      label-width="100px" 
+    <el-form
+      @submit.native.prevent
+      :model="addDeclarationInfo"
+      :rules="rules"
+      ref="addDeclarationForm"
+      label-width="100px"
       class="demo-ruleForm">
-      <el-form-item label="维修单号">
+      <el-form-item label="Maintenance Order ID">
         <el-input :disabled="true" v-model="addDeclarationInfo.logId"></el-input>
       </el-form-item>
-      <el-form-item label="追加预算" prop="addBudget">
+      <el-form-item label="Additional Budget" prop="addBudget">
         <el-input v-model.number="addDeclarationInfo.addBudget"></el-input>
       </el-form-item>
-      <el-form-item label="追加说明" prop="description">
+      <el-form-item label="Additional Desccription" prop="description">
         <RichTextEditor ref="RichTextEditor" ></RichTextEditor>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('addDeclarationForm')">提 交</el-button>
-        <el-button @click="resetForm('addDeclarationForm')">重 置</el-button>
+        <el-button type="primary" @click="submitForm('addDeclarationForm')">Submit</el-button>
+        <el-button @click="resetForm('addDeclarationForm')">Reset</el-button>
       </el-form-item>
     </el-form>
   </el-dialog>
@@ -39,16 +39,16 @@
     data(){
       var checkMoney = (rule, value, callback) => {
         if (!value) {
-          return callback(new Error('追加预算不能为空'));
+          return callback(new Error('Additional budget cannot be empty'));
         }
         setTimeout(() => {
           if (!Number.isInteger(value)) {
-            callback(new Error('请输入追加预算'));
+            callback(new Error('Please enter additional budget'));
           } else {
             if (value < 0) {
-              callback(new Error('追加预算必须大于0元'));
+              callback(new Error('Additional budget must above 0'));
             } else if(value>1000){
-              callback(new Error('每次追加预算不能超过1000元'));
+              callback(new Error('Each additional budget cannot exceed 1000'));
             }else {
               callback();
             }
@@ -84,17 +84,17 @@
 
       submitForm(formName){
         if(this.$refs['RichTextEditor'].isEmpty()){
-          this.$confirm("追加说明不能为空。");
+          this.$confirm("Additional description cannot be empty。");
         }else{
           this.addDeclarationInfo.description=this.$refs['RichTextEditor'].getContent();
           this.$refs[formName].validate((valid) => {
-            if (valid) {       
+            if (valid) {
               this.addDeclarationInfo.createTime=new Date().getTime();
               this.$emit('submitForm',this.addDeclarationInfo);
             } else {
-              this.$confirm('填报信息有误，请检查后重试');
+              this.$confirm('The information submitted is incorrect, please check and try again.');
             }
-          });  
+          });
         }
       },
       resetForm(formName){
@@ -102,7 +102,7 @@
         this.$refs['RichTextEditor'].Clear();
       },
       handleClose(done){
-        this.$confirm('确认关闭？')
+        this.$confirm('Confirm close?')
           .then(_ => {
             this.resetForm('addDeclarationForm');
             this.$emit('closeDialog');

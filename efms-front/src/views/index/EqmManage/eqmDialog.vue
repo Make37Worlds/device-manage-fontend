@@ -12,20 +12,20 @@
       ref="eqmForm"
       label-width="100px"
       class="demo-ruleForm">
-      <el-form-item label="设施名称" prop="name">
+      <el-form-item label="Facility Name" prop="name">
         <el-input v-model="newEqmInfo.name"></el-input>
       </el-form-item>
-      <el-form-item label="部门" prop="depId">
-        <el-select v-model.number="newEqmInfo.depId" placeholder="请选择部门">
-          <el-option label="总裁办" :value="1"></el-option>
-          <el-option label="维修部" :value="2"></el-option>
-          <el-option label="销售部" :value="3"></el-option>
-          <el-option label="运营部" :value="4"></el-option>
-          <el-option label="人事部" :value="5"></el-option>
+      <el-form-item label="Department" prop="depId">
+        <el-select v-model.number="newEqmInfo.depId" placeholder="Please select department">
+          <el-option label="President Office" :value="1"></el-option>
+          <el-option label="Maintenance Department" :value="2"></el-option>
+          <el-option label="Sales Department" :value="3"></el-option>
+          <el-option label="Operations Department" :value="4"></el-option>
+          <el-option label=" Personnel Department" :value="5"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="办公室" prop="office">
-        <el-select v-model="newEqmInfo.office" placeholder="请选择部门">
+      <el-form-item label="Office" prop="office">
+        <el-select v-model="newEqmInfo.office" placeholder="Please select office">
           <el-option label="101" :value="101"></el-option>
           <el-option label="102" :value="102"></el-option>
           <el-option label="103" :value="103"></el-option>
@@ -36,15 +36,15 @@
           <el-option label="204" :value="204"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="运行状态" prop="state">
+      <el-form-item label="State" prop="state">
         <el-radio-group v-model.number="newEqmInfo.state">
-          <el-radio :label="1" >运行中</el-radio>
-          <el-radio :label="3" >关闭</el-radio>
+          <el-radio :label="1" >In Operation</el-radio>
+          <el-radio :label="3" >Closed</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('eqmForm')">提 交</el-button>
-        <el-button @click="resetForm('eqmForm')">重 置</el-button>
+        <el-button type="primary" @click="submitForm('eqmForm')">Submit</el-button>
+        <el-button @click="resetForm('eqmForm')">Reset</el-button>
       </el-form-item>
     </el-form>
   </el-dialog>
@@ -84,19 +84,19 @@
       return {
         rules: {
           name: [
-            { required: true, message: '请输入设施名称', trigger: 'blur' },
-            { min: 1, max: 20, message: '长度在 1 到 20 个字符', trigger: 'blur' }
+            { required: true, message: 'Please enter facility name', trigger: 'blur' },
+            { min: 1, max: 20, message: 'Length between 1 to 20 characters', trigger: 'blur' }
           ],
           depId: [
-            { required: true, message: '请选择部门', trigger: 'change' }
+            { required: true, message: 'Please select department', trigger: 'change' }
           ],
           office: [
-            { required: true, message: '请选择办公室', trigger: 'change' }
+            { required: true, message: 'Please select office', trigger: 'change' }
           ],
           state: [
-            { required: true, message: '请选择运行状态', trigger: 'change' }
+            { required: true, message: 'Please select state', trigger: 'change' }
           ],
-          
+
         },
         newEqmInfo: {
           name: '',
@@ -127,12 +127,12 @@
             this.newEqmInfo.buyTime=new Date().getTime();
             this.$emit('submit',this.newEqmInfo,this.eqmId);
           } else {
-            this.$confirm('填报信息有误，请检查后重试');
+            this.$confirm('Information submitted is incorrect, please check and try again.');
           }
         });
       },
       handleClose(done){
-        this.$confirm('确认关闭？')
+        this.$confirm('Confirm close？')
         .then(_ => {
           this.resetForm('eqmForm');
           this.$emit('closeDialog');

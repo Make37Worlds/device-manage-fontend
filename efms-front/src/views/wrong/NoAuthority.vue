@@ -1,8 +1,8 @@
 <template>
   <div class="main-body">
     <div class="box">
-      <h1>当前用户无权限，访问页面失败。</h1>
-      <h3>即将跳转至上一页面</h3>
+      <h1>The previous user has no permission, page access failed.</h1>
+      <h3>Redirecting to the previous page...</h3>
     </div>
   </div>
 </template>
