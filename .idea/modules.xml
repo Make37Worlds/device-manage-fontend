@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/device-manage-fontend.iml" filepath="$PROJECT_DIR$/.idea/device-manage-fontend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../mall-frontend/.idea/e-commerce-front-master.iml" filepath="$PROJECT_DIR$/../mall-frontend/.idea/e-commerce-front-master.iml" />
     </modules>
   </component>
 </project>
