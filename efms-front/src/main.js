@@ -143,7 +143,7 @@ Vue.prototype.$notify = Notification;
 Vue.prototype.$message = Message;
 Vue.prototype.$cookie = cookie;
 
-axios.defaults.baseURL = 'http://localhost:8081';
+axios.defaults.baseURL = 'http://13.212.26.70:80';
 
 new Vue({
     el: '#app',
