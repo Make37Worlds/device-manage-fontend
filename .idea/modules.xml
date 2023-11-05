@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../mall-frontend/.idea/e-commerce-front-master.iml" filepath="$PROJECT_DIR$/../mall-frontend/.idea/e-commerce-front-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Front-EFMS.iml" filepath="$PROJECT_DIR$/Front-EFMS.iml" />
     </modules>
   </component>
 </project>

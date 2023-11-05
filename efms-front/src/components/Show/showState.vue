@@ -14,31 +14,31 @@ export default {
       getState(state){
         switch(state){
           case 1:
-            this.stateString="已申报";
+            this.stateString="Damage Reported";
             break;
           case 2:
-            this.stateString="已派遣";
+            this.stateString="Dispatched";
             break;
           case 3:
-            this.stateString="已追加申报";
+            this.stateString="Additional Declared";
             break;
           case 4:
-            this.stateString="追加申报已通过";
+            this.stateString="Additional Declaration Approved";
             break;
           case 5:
-            this.stateString="追加申报未通过";
+            this.stateString="Additional Declaration Not Approved";
             break;
           case 6:
-            this.stateString="成果已上报";
+            this.stateString="Result Reported";
             break;
           case 7:
-            this.stateString="成果审核通过";
+            this.stateString="Result Report Approved";
             break;
           case 8:
-            this.stateString="成果审核未通过";
+            this.stateString="Result Report Not Approved";
             break;
           default:
-            this.stateString="进度获取失败";
+            this.stateString="Failed to retrieve progress";
             break;
         };
       }

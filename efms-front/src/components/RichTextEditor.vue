@@ -34,7 +34,7 @@
       return {
         editor: null,
         html: '',
-        toolbarConfig: { 
+        toolbarConfig: {
           toolbarKeys:[
             "header1",
             "header2",
@@ -45,7 +45,7 @@
           ]
         },
         editorConfig: {
-          placeholder: '请输入内容...',
+          placeholder: 'Please enter content...',
           autofocus:false,
           scroll:true,
           MENU_CONF:{

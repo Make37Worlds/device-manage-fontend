@@ -15,14 +15,14 @@ export default {
       getResult(result){
         switch(result){
           case 1:
-            this.resultString="待审";
+            this.resultString="Not Reviewed";
             break;
           case 2:
-            this.resultString="通过";
+            this.resultString="Approved";
             this.type="success";
             break;
           case 3:
-            this.resultString="未通过";
+            this.resultString="Not Approved";
             this.type="danger";
             break;
           default:

@@ -1,5 +1,5 @@
 <template>
-    <el-tooltip class="item" effect="dark" :content="'角色编号：'+id" placement="top-start">
+    <el-tooltip class="item" effect="dark" :content="'Role ID：'+id" placement="top-start">
       <el-tag v-show="!empty" type="primary">{{roleName}}</el-tag>
     </el-tooltip>
 </template>
@@ -17,7 +17,7 @@ export default {
     methods:{
         getRole(id){
             if(id!==null){
-                axios.get("/efms/rolemanage/getname/"+id).then((res)=>{            
+                axios.get("/efms/rolemanage/getname/"+id).then((res)=>{
                     if(res.data.flag&&res.data.data!=""){
                         this.empty=false;
                         this.roleName=res.data.data;
@@ -27,7 +27,7 @@ export default {
                 })
             }else{
                 this.empty=true;
-            }   
+            }
         }
     },
     created(){

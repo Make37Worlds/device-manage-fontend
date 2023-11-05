@@ -14,19 +14,19 @@ export default {
       getDep(id){
         switch(id){
           case 1:
-            this.depName="总裁办";
+            this.depName="President Office";
             break;
           case 2:
-            this.depName="维修部";
+            this.depName="Maintenance Department";
             break;
           case 3:
-            this.depName="销售部";
+            this.depName="Sales Department";
             break;
           case 4:
-            this.depName="运营部";
+            this.depName="Operations Department";
             break;
           case 5:
-            this.depName="人事部";
+            this.depName="Personnel Department";
             break;
           default:
             break;
