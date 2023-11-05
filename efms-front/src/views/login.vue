@@ -1,7 +1,7 @@
 <template>
   <div class="login-bg">
     <div class="login-box">
-      <h3>Device Maintenance Management System (test)</h3>
+      <h3>Device Maintenance Management System</h3>
       <el-form
         ref="form"
         label-width="0"
